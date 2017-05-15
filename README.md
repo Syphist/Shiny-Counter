@@ -39,3 +39,6 @@ Like any other command line program you can use arguments with this script too. 
 * -c <value>: This will set the counter to the <value>. Anything that is not a number is counted as 0 by default in bash.
 * -p <value>: This will set the phase counter to the <value>. Anything that is not a number is not accepted.
 * -t <value>: This will set the total counter to the <value>. Anything that is not a number is not accepted.
+
+# Supported Platforms
+This will work on anything with a Unix-like terminal and bash. This means it will run out of the box on both Linux and macOS in the terminal. To get this running on a platform like Windows you will either need a 3rd party program, or in the case for Windows 10, you can enable the developer option to have an Ubuntu terminal as an offical application.
