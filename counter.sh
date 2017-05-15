@@ -10,6 +10,12 @@ MODE=0 #0 = number only, 1 = header, 2 = footer, 3 = header and footer
 CUT=0 #0 = Don't cut header or footer, 1 = length of string
 NOFILE=0 #If set to non 0 this will prevent file writing
 
+cat << EOF
+Shiny Counter v1.0 by Syphist
+Please consult with -h or the README.md for instructions
+Licensed under the GPLv3
+EOF
+
 writefile ()
 { #$1 = filename, $2 = value
   if [ ! "$NOFILE" = 0 ]; then #return the method early if file writing is disabled
@@ -65,15 +71,29 @@ Application Options:
   -t              Set the total count value. (By default it is initialized to be the same 
                   as the count value)
 
+Application Settings:
+                  If set to 0 (default) the output files contain the output value only; if 
+  Mode            1 the header and the ouput; if 2 the output and the footer; if 3 the 
+                  header, output, and footer. Use -m to set this value at startup.
+
+  Cut             If enabled this option cuts the header and footer based on output length. 
+                  This value is disabled by default. Use -x to enable at startup.
+
+  NoFile          If enabled this option disables file output. This value is disabled by 
+                  default. Use -n to enable at startup.
+
 Application Controls:
-  space, enter   Increment the counter.
-  0              Increment the phase, resets the regular counter, but not total.
-  z              Manually set the count value.
-  x              Manually set the phase value.
-  c              Manually set the total count value.
-  q              Manually set the mode.
-  w              Manually toggle cutting on and off.
-  e              Manually toggle file output on and off.
+  space, enter    Increment the counter.
+  0               Increment the phase, resets the regular counter, but not total.
+  z               Manually set the count value.
+  x               Manually set the phase value.
+  c               Manually set the total count value.
+  q               Manually set the mode.
+  w               Manually toggle cutting on and off.
+  e               Manually toggle file output on and off.
+
+Github page: <https://github.com/Syphist/Shiny-Counter>
+GNU GPLv3 License: <https://www.gnu.org/licenses/gpl-3.0.en.html>
 EOF
 }
 
@@ -105,19 +125,21 @@ while getopts "hxnm:c:p:t:" opt; do #find command line arguments
     ;;
   c) #Set the count from the -c argument
     COUNT=$OPTARG
+    COUNT=$(( COUNT + 0 )) #Make sure count is a number
     echo "Count: "$COUNT
     ;;
   p) #Set the phase from the -p argument
     PHASE=$OPTARG
+    PHASE=$(( PHASE + 0 )) #Make sure phase is a number
     echo "Phase: "$PHASE
     ;;
   t) #Set the total from the -t argument
     TOTAL=$OPTARG
+    TOTAL=$(( TOTAL + 0 )) #Make sure total is a number
     echo "Total: "$TOTAL
     ;;
   esac
 done
-
 
 if [ "$TOTAL" = 0 ]; then #set the total to the count if it is 0
   TOTAL=$COUNT
@@ -158,14 +180,17 @@ while true; do #loop until ctrl + c
   elif [ "$input" = "z" ]; then #press z to change count
     echo -n "Please enter current count: "
     read -r COUNT
+    COUNT=$(( COUNT + 0 )) #Make sure count is a number
     writefile "count" "$COUNT"
   elif [ "$input" = "c" ]; then #press x to change phase
     echo -n "Please enter current phase: "
     read -r PHASE
+    PHASE=$(( PHASE + 0 )) #Make sure phase is a number
     writefile "phase" "$PHASE"
   elif [ "$input" = "v" ]; then #press c to change current total count
     echo -n "Please enter current total count: "
     read -r TOTAL
+    TOTAL=$(( TOTAL + 0 )) #Make sure total is a number
     writefile "total" "$TOTAL"
   elif [ "$input" = "q" ]; then #press q to change mode
     echo -n "Please enter desired mode (invalid values = 0): "
