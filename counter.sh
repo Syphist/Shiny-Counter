@@ -70,9 +70,9 @@ Application Options:
   -m              Set the mode of the file output; 0 is output only; 1 is header and output 
                   only; 2 is footer and output only; 3 is header, output, and footer
   -c              Set the count value.
-  -p              Set what phase you are on.
+  -p              Set what phase you are on. (Has to be greater than 1)
   -t              Set the total count value. (By default it is initialized to be the same 
-                  as the count value)
+                  as the count value and cannot be less than the count value)
 
 Application Settings:
                   If set to 0 (default) the output files contain the output value only; if 
