@@ -11,12 +11,13 @@ This section will go over the in application controls that will allow you to use
 
 * Space or Enter: This will increment the base counter and total counter. This is done whenever you want to add a count to your encounters, chain length, or soft resets.
 * 0: This will increment the phase counter and reset the base counter (but not the total counter) and is used to indicate a new phase.
-* z: This is used to manually set the value of the counter. This is one of the 2 ways to continue where you left off, or can be used to correct a mistake.
-* x: This is used to manually set the value of the phase counter. This is one of the 2 ways to continue where you left off, or can be used to correct a mistake.
-* c: This is used to manually set the value of the total counter. This is one of the 2 ways you can pick up where you left off, or can be used to correct a mistake.
-* q: This is used to change the Mode setting. You can enter a number 0-3. Anything else will be parsed as 0.
+* z: This is used to manually set the value of the counter. This is one of the 2 ways to continue where you left off, or can be used to correct a mistake. A blank or non-numeric input will not change the counter.
+* x: This is used to manually set the value of the phase counter. This is one of the 2 ways to continue where you left off, or can be used to correct a mistake. A blank, non-numeric, or value less than 1 as the input will not change the phase.
+* c: This is used to manually set the value of the total counter. This is one of the 2 ways you can pick up where you left off, or can be used to correct a mistake. A blank, non-numeric, or value less than the counter as the input will not change the total.
+* q: This is used to change the Mode setting. You can enter a number 0-3. A blank or invalid input will not change the mode.
 * w: This is used to toggle the Cut setting between on and off.
-* e: This is used to toggle the NoFile setting between on and off. 
+* e: This is used to toggle the NoFile setting between on and off.
+* ctrl + c: This is used to exit the program. This is a standard terminal shortcut. An official hotkey will be added in a future release
 
 ## Settings
 * Mode: This will change what is sent to the output files. The default mode is 0. If it is set to 0 you will only get the output value. If 1 you will get a header then the ouput. If 2 you will get the output then a footer. If 3 you will get a header, the ouput then a footer.
@@ -37,8 +38,8 @@ Like any other command line program you can use arguments with this script too. 
 * -n: This will toggle the NoFile setting on when the program starts, as the default is off.
 * -m {value}: This will set your Mode setting to the {value} if it is a number 0-3, otherwise it will set it to 0.
 * -c {value}: This will set the counter to the {value}. Anything that is not a number is counted as 0 by default in bash.
-* -p {value}: This will set the phase counter to the {value}. Anything that is not a number is not accepted.
-* -t {value}: This will set the total counter to the {value}. Anything that is not a number is not accepted.
+* -p {value}: This will set the phase counter to the {value}. Anything that is not a number or is less than 1 is not accepted.
+* -t {value}: This will set the total counter to the {value}. Anything that is not a number or is less than the counter is not accepted.
 
 # Supported Platforms
 This will work on anything with a Unix-like terminal and bash. This means it will run out of the box on both Linux and macOS in the terminal. To get this running on a platform like Windows you will either need a 3rd party program, or in the case for Windows 10, you can enable the developer option to have an Ubuntu terminal as an offical application.
